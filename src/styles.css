@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    background-color: #455A64;
+
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #FFC107;
+}
+
+.body{
+    background-color: #455A64;
+    height: 200vh;
+}
