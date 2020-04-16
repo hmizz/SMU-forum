@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 html,
 body {
-    background-color: #455A64;
-
   height: 100%;
 }
 body {
@@ -14,15 +13,17 @@ body {
 
 a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 a:hover{
     text-decoration: none;
-    color: #FFC107;
+    color: #FA9600;
 }
 
 .body{
-    background-color: #455A64;
+    background-color: white;
     height: 200vh;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

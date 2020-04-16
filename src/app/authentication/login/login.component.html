@@ -1,0 +1,53 @@
+<p>login works!</p>
+<div class="login-wrapper">
+    <br>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab class="tab" label="Login">
+            <div class="login">
+                <h1>Login to SMU-FORUM</h1>
+                <br>
+                <br>
+                <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+                    <mat-form-field>
+                        <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel"
+                            required email>
+                        <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="password" name="password" ngModel matInput placeholder="Password"
+                            #passwordInput="ngModel" required>
+                        <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-error *ngIf="!message">Credentials are invalid</mat-error>
+                    <button mat-raised-button color="accent" class="button button4" type="submit">Login</button>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Sign Up">
+            <div class="login">
+                <br>
+                <h1>Sign Up to SMU-FORUM</h1>
+                <br>
+                <br>
+                <form (submit)="onSignUp(signupForm)" #signupForm="ngForm">
+                    <mat-form-field>
+                        <input matInput name="fullname" ngModel placeholder="Full Name" #fullname="ngModel">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput name="email" ngModel placeholder="E-Mail" #emailInput="ngModel" required email>
+                        <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="password" name="password" ngModel matInput placeholder="Password"
+                            #passwordInput="ngModel" required>
+                        <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="button button4" color="accent" type="submit">Signup</button>
+                </form>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
