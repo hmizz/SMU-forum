@@ -1,16 +1,4 @@
-<!-- <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let post of posts">
-    <mat-expansion-panel-header>
-      {{ post.title }}
-    </mat-expansion-panel-header>
-    <p>{{ post.content }}</p>
-    <mat-action-row>
-      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p> -->
+
 
 <mat-accordion multi="true" *ngIf="posts.length > 0">
   <div class="card" *ngFor="let post of posts">
@@ -20,9 +8,26 @@
     </h1>
     <div class="card-body">
       <p class="card-text">{{ post.content }}</p>
+      <p class="card-text">{{ post.comment }}</p>
       <a (click)="onDelete(post.id)" class="btn btn-danger">DELETE</a>
-      <a class="btn btn-primary">Answer</a>
       
+      <form (submit)="onUpdate(post.id, post.title, post.content, commentForm)" #commentForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="4"
+          name="comment"
+          [ngModel]="post?.comment"
+          required
+          placeholder="Post comment"
+          #content="ngModel"></textarea>
+        
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit">comment Post</button>
+      </form>
     </div>
   </div>
 </mat-accordion>

@@ -23,7 +23,8 @@ router.put("/:id", (req, res, next) => {
     const post = new Post({
         _id: req.body.id,
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        comment : req.body.comment
     });
     Post.updateOne({ _id: req.params.id }, post).then(result => {
         res.status(200).json({ message: "Update successful!" });
