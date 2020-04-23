@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Post } from "../post.model";
 import { PostsService } from "../posts.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-post-list",
@@ -17,6 +18,9 @@ export class PostListComponent implements OnInit, OnDestroy {
   // ];
   posts: Post[] = [];
   isLoading = false;
+
+  comment: any ;
+
   private postsSub: Subscription;
 
   constructor(public postsService: PostsService) {}
@@ -37,5 +41,8 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.postsSub.unsubscribe();
+  }
+  onUpdate(id: string, title: string, content: string, form: NgForm) {
+    this.postsService.updatePost(id, title, content, form.value.comment);
   }
 }

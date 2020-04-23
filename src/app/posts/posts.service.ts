@@ -25,7 +25,8 @@ export class PostsService {
               content: post.content,
               topic: post.topic,
               publisher: post.publisher,
-              id: post._id
+              id: post._id,
+              comment:post.comment
             };
           });
         })
@@ -41,13 +42,13 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; topic:null; publisher: null  }>(
+    return this.http.get<{ _id: string; title: string; content: string; topic:null; publisher: null;comment:string  }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
 
   addPost(title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername() };
+    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername(),comment:null };
     this.http
       .post<{ message: string; postId: string }>(
         "http://localhost:3000/api/posts",
@@ -61,9 +62,10 @@ export class PostsService {
         this.router.navigate(["/"]);
       });
   }
+  
 
-  updatePost(id: string, title: string, content: string) {
-    const post: Post = { id: id, title: title, content: content, topic:null, publisher: null  };
+  updatePost(id: string, title: string, content: string,comment:string) {
+    const post: Post = { id: id, title: title, content: content, topic:null, publisher: null, comment:comment };
     this.http
       .put("http://localhost:3000/api/posts/" + id, post)
       .subscribe(response => {

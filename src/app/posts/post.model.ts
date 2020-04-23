@@ -4,4 +4,5 @@ export interface Post {
     content: string;
     topic: string;
     publisher: string;
+    comment: string;
   }
