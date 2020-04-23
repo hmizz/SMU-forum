@@ -4,7 +4,7 @@ const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+router.post("",checkAuth, (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
