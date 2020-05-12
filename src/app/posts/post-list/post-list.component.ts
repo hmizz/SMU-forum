@@ -10,27 +10,28 @@ import { NgForm } from '@angular/forms';
   templateUrl: "./post-list.component.html",
   styleUrls: ["./post-list.component.css"]
 })
-export class PostListComponent implements OnInit, OnDestroy {
+export class PostListComponent implements OnInit {
   // posts = [
   //   { title: "First Post", content: "This is the first post's content" },
   //   { title: "Second Post", content: "This is the second post's content" },
   //   { title: "Third Post", content: "This is the third post's content" }
   // ];
   posts: Post[] = [];
-  isLoading = false;
 
+  message:boolean =false;
   comment: any ;
+  tab:any;
 
   private postsSub: Subscription;
 
   constructor(public postsService: PostsService) {}
 
   ngOnInit() {
-    this.isLoading = true;
+    
     this.postsService.getPosts();
     this.postsSub = this.postsService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
-        this.isLoading = false;
+        
         this.posts = posts;
       });
   }
@@ -39,10 +40,161 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsService.deletePost(postId);
   }
 
-  ngOnDestroy() {
-    this.postsSub.unsubscribe();
+  
+  onUpdate(id: string, title: string, content: string,topic:string, form: NgForm) {
+    this.postsService.updatePost(
+      id,
+       title,
+        content,
+        topic,
+         form.value.comment);
   }
-  onUpdate(id: string, title: string, content: string, form: NgForm) {
-    this.postsService.updatePost(id, title, content, form.value.comment);
+
+  FilterMov(){
+
+    this.posts = this.postsService.getPostsArray();
+      this.posts=this.posts.filter(res=>{
+      return res.topic.toLocaleLowerCase().match("movies");
+      
+    });
+    if(this.posts.length == 0){
+      this.message=true;
+
+    }else{
+
+   this.message = false;
+  
   }
+}
+
+FilterMus(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("music");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}}
+
+FilterGam(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("gaming");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}}
+
+FilterTv(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("tv");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}}
+
+FilterUni(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("university");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}}
+
+FilterMed(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("media");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}}
+
+FilterJob(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("jobs");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}
+}
+FilterSpo(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("sports & health");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}
+}
+FilterFas(){
+
+  this.posts = this.postsService.getPostsArray();
+    this.posts=this.posts.filter(res=>{
+    return res.topic.toLocaleLowerCase().match("fashion & beauty");
+    
+  });
+  if(this.posts.length == 0){
+    this.message=true;
+
+  }else{
+
+ this.message = false;
+
+}
+
+
+}
 }

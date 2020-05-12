@@ -16,6 +16,7 @@ export class AuthService {
   private token: string;
   private authStatusListener = new Subject<boolean>();
   private username: string;
+  private id :string;
   constructor(private http: HttpClient, private router: Router) { }
 
   getToken() {
@@ -25,7 +26,9 @@ export class AuthService {
   getIsAuth() {
     return this.isAuthenticated;
   }
-
+  getUserID(){
+    return this.id;
+  }
   getUsername() {
     return this.username;
   }
@@ -46,7 +49,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { fullname: null, email: email, password: password };
-    this.http.post<{ token: string, username: string }>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{ token: string, username: string, id : string }>("http://localhost:3000/api/user/login", authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -54,6 +57,7 @@ export class AuthService {
           console.log(response);
           this.username = response.username;
           this.isAuthenticated = true;
+          this.id = response.id;
           this.authStatusListener.next(true);
           this.router.navigate(['/']);
           this.message= true;

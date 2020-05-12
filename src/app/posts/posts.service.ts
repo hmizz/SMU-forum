@@ -22,9 +22,9 @@ export class PostsService {
           return postData.posts.map(post => {
             return {
               title: post.title,
-              content: post.content,
               topic: post.topic,
               publisher: post.publisher,
+              content: post.content,
               id: post._id,
               comment:post.comment
             };
@@ -42,13 +42,13 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; topic:null; publisher: null;comment:string  }>(
+    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comment:string  }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
 
-  addPost(title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername(),comment:null };
+  addPost(title: string, topic: string , content:string) {
+    const post: Post = { id: null, title: title, topic: topic, publisher:{ name:this.authService.getUsername(),id:this.authService.getUserID()}, content: content,comment:null };
     this.http
       .post<{ message: string; postId: string }>(
         "http://localhost:3000/api/posts",
@@ -64,8 +64,8 @@ export class PostsService {
   }
   
 
-  updatePost(id: string, title: string, content: string,comment:string) {
-    const post: Post = { id: id, title: title, content: content, topic:null, publisher: null, comment:comment };
+  updatePost(id: string, title: string,topic:string, content: string,comment:[]) {
+    const post: Post = { id: id, title: title, content: null, topic:topic, publisher: null, comment:comment };
     this.http
       .put("http://localhost:3000/api/posts/" + id, post)
       .subscribe(response => {
@@ -86,5 +86,8 @@ export class PostsService {
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
       });
+  }
+  getPostsArray(){
+    return this.posts ;
   }
 }

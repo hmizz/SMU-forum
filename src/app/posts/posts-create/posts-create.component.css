@@ -1,8 +1,15 @@
-mat-form-field,
-textarea {
-  width: 100%;
-}
-mat-card {
+.container {
+  margin-top: 100px;
 
-    margin-top: 150px;
-}
+  margin-bottom: 75px;
+  }
+  col-2{
+    padding: 0px;
+  }
+  
+  col-6 {
+    padding : 0px;
+  }
+  h3 {
+    text-align: center;
+  }

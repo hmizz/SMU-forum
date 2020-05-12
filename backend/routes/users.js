@@ -51,7 +51,8 @@ router.post("/login", (req, res, next) => {
                  "this_is_secret",{expiresIn:"1h"});
                  res.status(200).json({
                     token: token,
-                    username : fetchedUser.fullName
+                    username : fetchedUser.fullName,
+                    id:fetchedUser._id
                  });
         })
         .catch(err => {
