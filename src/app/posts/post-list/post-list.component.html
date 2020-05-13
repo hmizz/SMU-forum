@@ -119,6 +119,10 @@
                           
                         </div> 
                 </div>
+                
+<div class="alert alert-info" role="alert" *ngIf="message" style="height: 40px;">
+  This Topic is empty. <a href="http://localhost:4200/posts" class="alert-link">See all Posts</a>. Give it a click if you like.
+</div>
                 <div class="col-md-9">
                   
                   <div class="card" *ngFor="let post of posts">
@@ -152,7 +156,7 @@
                         ></textarea>
                       </div>
                       <button name="submit" type="submit" class="btn btn-primary">
-                        Comment
+                        Compose Reply
                       </button>
                       <button (click)="onDelete(post.id)" class="btn btn-danger">DELETE</button>
                       </form>
