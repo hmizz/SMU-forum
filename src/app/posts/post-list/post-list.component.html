@@ -113,7 +113,6 @@
                             Sports & Health</button>
                           <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab8'"  (click)="FilterFas(); tab='tab8'" role="tab">
                             Fashion & Beauty</button>
-                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab9'"  (click)="FilterMov(); tab='tab9'" role="tab">Movies</button>
                           </ul>
                           
                           
@@ -139,9 +138,9 @@
                     </div>
                     <div class="card-body">
                       <p class="card-text">{{ post.content }}</p>
-                      <p class="card-text">{{ post.comment }}</p>
+                      <p class="card-text" *ngFor="let comment of post.comments" >{{ comment }}</p>
                       
-                      <form (submit)="onUpdate(post.id, post.title,post.topic, post.content, commentForm)" #commentForm="ngForm" >
+                      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm" >
                       <div class="col-8">
                         <textarea
                         id="content"

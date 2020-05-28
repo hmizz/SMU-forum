@@ -11,15 +11,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ["./post-list.component.css"]
 })
 export class PostListComponent implements OnInit {
-  // posts = [
-  //   { title: "First Post", content: "This is the first post's content" },
-  //   { title: "Second Post", content: "This is the second post's content" },
-  //   { title: "Third Post", content: "This is the third post's content" }
-  // ];
   posts: Post[] = [];
 
   message:boolean =false;
-  comment: any ;
   tab:any;
 
   private postsSub: Subscription;
@@ -31,7 +25,6 @@ export class PostListComponent implements OnInit {
     this.postsService.getPosts();
     this.postsSub = this.postsService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
-        
         this.posts = posts;
       });
   }
