@@ -22,9 +22,9 @@ export class PostsService {
           return postData.posts.map(post => {
             return {
               title: post.title,
-              content: post.content,
               topic: post.topic,
               publisher: post.publisher,
+              content: post.content,
               id: post._id,
               comments:post.comments
             };
@@ -42,7 +42,7 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; topic:null; publisher: null;comment:string  }>(
+    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comment:string  }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
@@ -86,5 +86,8 @@ export class PostsService {
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
       });
+  }
+  getPostsArray(){
+    return this.posts ;
   }
 }

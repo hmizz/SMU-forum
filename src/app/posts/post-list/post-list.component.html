@@ -1,5 +1,5 @@
 
-
+<!--
 <mat-accordion multi="true" *ngIf="posts.length > 0">
   <div class="card" *ngFor="let post of posts">
     <h1 class="card-header">
@@ -31,3 +31,139 @@
     </div>
   </div>
 </mat-accordion>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 ">
+<div class="categorybar-container">
+  <ul   class="list-group  " id="list-tab"  role="tablist">
+    
+    <button class="list-group-item list-group-item-action" [class.active]="tab=='tab1'"  (click)= "tab='tab1'" role="tab" ><a>Academic</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab2'" (click)=" tab='tab2'" role="tab"><a>Political</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab3'" (click)=" tab='tab3'" role="tab" ><a>Media & Publication Groups</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab4'" (click)=" tab='tab4'" role="tab" ><a>Community Service & Social Justice</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab5'" (click)=" tab='tab5'" role="tab" ><a>Theater & The Arts</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab6'" (click)=" tab='tab6'" role="tab" ><a>Cultural</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab7'" (click)=" tab='tab7'" role="tab" ><a>Spiritual</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab8'" (click)=" tab='tab8'" role="tab" ><a>Sports</a></button>
+    <button class="list-group-item list-group-item-action"  [class.active]="tab=='tab9'" (click)=" tab='tab9'" role="tab" ><a >Show all</a></button>
+    
+  </ul>
+</div>
+<div class="row">
+  <div class="col-md-12">
+            <div multi="true" *ngIf="posts.length  0">
+                    <div class="card" *ngFor="let post of posts">
+                      <div class="card-header">
+                        {{ post.title }}   
+                        <div class="topic">
+                          Topic:"{{post.topic}}"
+                         
+                        </div>
+                          <div class="publisher">
+                          {{post.publisher}}
+                         
+                          </div>
+                       
+                      </div>
+                      <div class="card-body">
+                        
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text">{{ post.comment }}</p>
+                        
+                        <form (submit)="onUpdate(post.id, post.title,post.topic, post.content, commentForm)" #commentForm="ngForm" >
+                        <div class="col-8">
+                          <textarea
+                          id="content"
+                          cols="30"
+                          rows="2"
+                          name="comment"
+                          [ngModel]="post?.comment"
+                          required
+                          placeholder="Post comment"
+                          #content="ngModel"
+                          class="form-control"
+                          ></textarea>
+                        </div>
+                        <button name="submit" type="submit" class="btn btn-primary">
+                          Comment
+                        </button>
+                        <button (click)="onDelete(post.id)" class="btn btn-danger">DELETE</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            -->
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3 ">
+                     <div class="list-group ">
+                      <ul   class="list-group list-group " id="list-tab"  role="tablist">
+                      <button  class="list-group-item list-group-item-action active" [class.active]="tab=='tab10'" (click)="ngOnInit(); tab='tab10'" role="tab" ><a >Show all</a></button>
+                          <button  class="list-group-item list-group-item-action " [class.active]="tab=='tab1'"  (click)="FilterMus(); tab='tab1'" role="tab">Music</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab2'"  (click)="FilterGam(); tab='tab2'" role="tab">Gaming</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab3'"  (click)="FilterTv(); tab='tab3'" role="tab">TV</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab4'"  (click)="FilterUni(); tab='tab4'" role="tab">University</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab5'"  (click)="FilterMed(); tab='tab5'" role="tab">Media</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab6'"  (click)="FilterJob(); tab='tab6'" role="tab">Jobs</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab7'"  (click)="FilterSpo(); tab='tab7'" role="tab">
+                            Sports & Health</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab8'"  (click)="FilterFas(); tab='tab8'" role="tab">
+                            Fashion & Beauty</button>
+                          <button  class="list-group-item list-group-item-action" [class.active]="tab=='tab9'"  (click)="FilterMov(); tab='tab9'" role="tab">Movies</button>
+                          </ul>
+                          
+                          
+                        </div> 
+                </div>
+                
+<div class="alert alert-info" role="alert" *ngIf="message" style="height: 40px;">
+  This Topic is empty. <a href="http://localhost:4200/posts" class="alert-link">See all Posts</a>. Give it a click if you like.
+</div>
+                <div class="col-md-9">
+                  
+                  <div class="card" *ngFor="let post of posts">
+                    <div class="card-header" >
+                      {{ post.title }}   
+                        <div class="topic">
+                          {{post.topic}}
+                         
+                        </div>
+                          <div class="publisher">
+                          {{post.publisher}}
+                         
+                          </div>
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text">{{ post.content }}</p>
+                      <p class="card-text">{{ post.comment }}</p>
+                      
+                      <form (submit)="onUpdate(post.id, post.title,post.topic, post.content, commentForm)" #commentForm="ngForm" >
+                      <div class="col-8">
+                        <textarea
+                        id="content"
+                        cols="30"
+                        rows="2"
+                        name="comment"
+                        [ngModel]="post?.comment"
+                        required
+                        placeholder="Post comment"
+                        #content="ngModel"
+                        class="form-control"
+                        ></textarea>
+                      </div>
+                      <button name="submit" type="submit" class="btn btn-primary">
+                        Compose Reply
+                      </button>
+                      <button (click)="onDelete(post.id)" class="btn btn-danger">DELETE</button>
+                      </form>
+                    </div>
+                  
+                </div>
+                </div>   
+            </div>
+                            
+                       
