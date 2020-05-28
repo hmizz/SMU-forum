@@ -7,7 +7,7 @@ import { Post } from "../post.model";
 @Component({
   selector: "app-post-create",
   templateUrl: "./posts-create.component.html",
-  styleUrls: ["./posts-create.component.css"]
+  styleUrls: ["./posts-create.component.css"],
 })
 export class PostsCreateComponent implements OnInit {
   enteredTitle = "";
@@ -28,9 +28,16 @@ export class PostsCreateComponent implements OnInit {
         this.mode = "edit";
         this.postId = paramMap.get("postId");
         this.isLoading = true;
-        this.postsService.getPost(this.postId).subscribe(postData => {
+        this.postsService.getPost(this.postId).subscribe((postData) => {
           this.isLoading = false;
-          this.post = {id: postData._id, title: postData.title, content: postData.content, topic: null, publisher: null,comment:postData.comment};
+          this.post = {
+            id: postData._id,
+            title: postData.title,
+            content: postData.content,
+            topic: null,
+            publisher: null,
+            comments: null
+          };
         });
       } else {
         this.mode = "create";
@@ -44,17 +51,7 @@ export class PostsCreateComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    if (this.mode === "create") {
-      this.postsService.addPost(form.value.title, form.value.content);
-    } else {
-      this.postsService.updatePost(
-        this.postId,
-        form.value.title,
-        form.value.content,
-        form.value.comment
-
-      );
-    }
+    this.postsService.addPost(form.value.title, form.value.content);
     form.resetForm();
   }
 }

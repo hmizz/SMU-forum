@@ -5,7 +5,7 @@ const postSchema = mongoose.Schema({
     content: {type: String},
     topic: {type: String},
     publisher: {type: String},
-    comment: {type: String}
+    comments: {type: []}
 });
 
 module.exports = mongoose.model("Post", postSchema);

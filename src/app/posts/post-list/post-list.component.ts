@@ -42,7 +42,10 @@ export class PostListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.postsSub.unsubscribe();
   }
-  onUpdate(id: string, title: string, content: string, form: NgForm) {
-    this.postsService.updatePost(id, title, content, form.value.comment);
+  onUpdate(post: Post, form: NgForm) {
+    let comments: string[] = post.comments ;
+    comments.push(form.value.comment.toString());
+    this.postsService.updatePost(post.id, comments);
+    form.resetForm();
   }
 }

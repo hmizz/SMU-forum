@@ -4,12 +4,13 @@ const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
 const router = express.Router();
 
-router.post("",checkAuth, (req, res, next) => {
+router.post("", (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
         topic: req.body.topic,
-        publisher: req.body.publisher
+        publisher: req.body.publisher,
+        comments: req.body.comments
     });
     post.save().then(createdpost => {
         res.status(201).json({
@@ -20,14 +21,8 @@ router.post("",checkAuth, (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-    const post = new Post({
-        _id: req.body.id,
-        title: req.body.title,
-        content: req.body.content,
-        comment : req.body.comment
-    });
-    Post.updateOne({ _id: req.params.id }, post).then(result => {
-        res.status(200).json({ message: "Update successful!" });
+    Post.updateOne({ _id: req.params.id }, { comments : req.body.comments }).then(result => {
+            res.status(200).json({ message: "Update successful!"});
     });
 });
 

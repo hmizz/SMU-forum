@@ -8,16 +8,16 @@
     </h1>
     <div class="card-body">
       <p class="card-text">{{ post.content }}</p>
-      <p class="card-text">{{ post.comment }}</p>
+      <p class="card-text" id="comment" *ngFor="let comment of post.comments">{{ comment }}</p>
       <a (click)="onDelete(post.id)" class="btn btn-danger">DELETE</a>
       
-      <form (submit)="onUpdate(post.id, post.title, post.content, commentForm)" #commentForm="ngForm" *ngIf="!isLoading">
+      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
       <mat-form-field>
         <textarea
           matInput
           rows="4"
           name="comment"
-          [ngModel]="post?.comment"
+          [ngModel]
           required
           placeholder="Post comment"
           #content="ngModel"></textarea>

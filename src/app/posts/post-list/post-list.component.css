@@ -30,6 +30,8 @@
     grid-column: 3 / 4;
     justify-self: end;
     font-weight: 50;
-
-
+  }
+  #comment {
+    border: 5px;
+    border-color: black;
   }

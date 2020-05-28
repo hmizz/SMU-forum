@@ -26,7 +26,7 @@ export class PostsService {
               topic: post.topic,
               publisher: post.publisher,
               id: post._id,
-              comment:post.comment
+              comments:post.comments
             };
           });
         })
@@ -48,7 +48,7 @@ export class PostsService {
   }
 
   addPost(title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername(),comment:null };
+    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername(),comments: [] };
     this.http
       .post<{ message: string; postId: string }>(
         "http://localhost:3000/api/posts",
@@ -64,17 +64,17 @@ export class PostsService {
   }
   
 
-  updatePost(id: string, title: string, content: string,comment:string) {
-    const post: Post = { id: id, title: title, content: content, topic:null, publisher: null, comment:comment };
+  updatePost(id: string, comments: string[]) {
     this.http
-      .put("http://localhost:3000/api/posts/" + id, post)
+      .put<{ message: string}>("http://localhost:3000/api/posts/" + id, {comments: comments})
       .subscribe(response => {
         const updatedPosts = [...this.posts];
-        const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id);
-        updatedPosts[oldPostIndex] = post;
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
+        updatedPosts[oldPostIndex].comments = comments ;
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
-        this.router.navigate(["/"]);
+        console.log(response);
+        this.router.navigate(["/posts"]);
       });
   }
 
