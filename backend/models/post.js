@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema({
     title: {type:String, required:true},
     content: {type: String},
     topic: {type: String},
-    publisher: {type: String},
+    publisher: {type: {name: String, id: String}},
     comments: {type: []}
 });
 

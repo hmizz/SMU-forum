@@ -42,13 +42,13 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comment:string  }>(
+    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comments:string[]  }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
 
-  addPost(title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content, topic:null, publisher: this.authService.getUsername(),comments: [] };
+  addPost(title: string, topic: string , content:string) {
+    const post: Post = { id: null, title: title, topic: topic, publisher:{ name:this.authService.getUsername(),id:this.authService.getUserID()}, content: content, comments: [] };
     this.http
       .post<{ message: string; postId: string }>(
         "http://localhost:3000/api/posts",
@@ -62,9 +62,8 @@ export class PostsService {
         this.router.navigate(["/"]);
       });
   }
-  
 
-  updatePost(id: string, comments: string[]) {
+  addComment(id: string, comments: string[]) {
     this.http
       .put<{ message: string}>("http://localhost:3000/api/posts/" + id, {comments: comments})
       .subscribe(response => {
@@ -78,6 +77,19 @@ export class PostsService {
       });
   }
 
+  updatePost(post: Post) {
+    this.http
+      .patch("http://localhost:3000/api/posts/" + post.id, post)
+      .subscribe(response => {
+        const updatedPosts = [...this.posts];
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id);
+        updatedPosts[oldPostIndex] = post;
+        this.posts = updatedPosts;
+        this.postsUpdated.next([...this.posts]);
+        this.router.navigate(["/posts"]);
+      });
+  }
+
   deletePost(postId: string) {
     this.http
       .delete("http://localhost:3000/api/posts/" + postId)
@@ -85,6 +97,7 @@ export class PostsService {
         const updatedPosts = this.posts.filter(post => post.id !== postId);
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
+        this.router.navigate(["/posts"]);
       });
   }
   getPostsArray(){

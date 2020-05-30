@@ -3,6 +3,6 @@ export interface Post {
     title: string;
     content: string;
     topic: string;
-    publisher: string;
+    publisher: {name:string, id: string};
     comments: string[];
   }

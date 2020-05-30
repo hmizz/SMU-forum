@@ -34,9 +34,9 @@ export class PostsCreateComponent implements OnInit {
             id: postData._id,
             title: postData.title,
             content: postData.content,
-            topic: null,
-            publisher: null,
-            comments: null
+            topic: postData.topic,
+            publisher: postData.publisher,
+            comments: postData.comments,
           };
         });
       } else {
@@ -51,7 +51,26 @@ export class PostsCreateComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.postsService.addPost(form.value.title, form.value.content);
+    if (this.mode === "create") {
+      this.postsService.addPost(
+        form.value.title,
+        form.value.topic,
+        form.value.content
+      );
+    } else {
+      let post: Post = {
+        id: this.post.id,
+        title: form.value.title,
+        content: form.value.content,
+        topic: form.value.topic,
+        publisher: {
+          name: this.post.publisher.name,
+          id: this.post.publisher.id,
+        },
+        comments: this.post.comments,
+      };
+      this.postsService.updatePost(post);
+    }
     form.resetForm();
   }
 }
