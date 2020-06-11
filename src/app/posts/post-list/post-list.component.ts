@@ -11,8 +11,9 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./post-list.component.css"],
 })
 export class PostListComponent implements OnInit {
+  filter = { Music: true, Gaming: true, TV: true };
   posts: Post[] = [];
-
+  
   message: boolean = false;
   tab: any;
 
@@ -38,9 +39,9 @@ export class PostListComponent implements OnInit {
     let comments: string[] = post.comments;
     comments.push(form.value.comment.toString());
     this.postsService.addComment(post.id, comments);
-    form.resetForm();
+    
   }
-
+  
   FilterMov() {
     this.posts = this.postsService.getPostsArray();
     this.posts = this.posts.filter((res) => {
