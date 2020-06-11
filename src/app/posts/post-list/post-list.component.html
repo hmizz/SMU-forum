@@ -101,6 +101,9 @@
               <div class="row">
                 <div class="col-md-3 ">
                      <div class="list-group ">
+                      
+                      <!-- ... --->
+                      
                       <ul   class="list-group list-group " id="list-tab"  role="tablist">
                       <button  class="list-group-item list-group-item-action active" [class.active]="tab=='tab10'" (click)="ngOnInit(); tab='tab10'" role="tab" ><a >Show all</a></button>
                           <button  class="list-group-item list-group-item-action " [class.active]="tab=='tab1'"  (click)="FilterMus(); tab='tab1'" role="tab">Music</button>
@@ -126,26 +129,33 @@
                   
                   <div class="card" *ngFor="let post of posts">
                     <div class="card-header" >
-                      {{ post.title }}   
-                        <div class="topic">
-                          {{post.topic}}
-                         
-                        </div>
+                      {{post.publisher.name}}
+                       
                           <div class="publisher">
-                          {{post.publisher.name}}
-                         
+                           Topic: {{post.topic}}
                           </div>
                     </div>
                     <div class="card-body">
-                      <p class="card-text">{{ post.content }}</p>
-                      <p class="card-text" *ngFor="let comment of post.comments" >{{ comment }}</p>
+                      <p  class="title">Post title:{{post.title}}</p>
                       
-                      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm" >
-                      <div class="col-8">
+                      <p class="card-text">{{ post.content }}</p>
+                      
+                     
+                      
+                        <a class="comments-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                    >
+                     View comments    
+                        </a>
+                      <div  id="collapseOne" class="collapse" aria-labelledby="headingOne" *ngFor="let comment of post.comments">
+                          {{ comment }}
+                      </div>
+                      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
+                      <div class="textarea-container">
+                        
                         <textarea
-                        id="content"
-                        cols="30"
-                        rows="2"
+                        
+                        cols="10"
+                        rows="3"
                         name="comment"
                         [ngModel]="post?.comment"
                         required
@@ -153,10 +163,11 @@
                         #content="ngModel"
                         class="form-control"
                         ></textarea>
+                        <button name="submit" type="submit" class="btn btn-primary">
+                          Comment
+                        </button>
                       </div>
-                      <button name="submit" type="submit" class="btn btn-primary">
-                        Compose Reply
-                      </button>
+                    
                       <button (click)="onDelete(post.id)" class="btn btn-danger">DELETE</button>
                       </form>
                     </div>
