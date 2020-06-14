@@ -24,6 +24,7 @@ import { AuthInterceptor } from './authentication/auth-interceptor';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PostsCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { PostComponent } from './posts/post/post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     LoginComponent,
     PostsCreateComponent,
     PostListComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,

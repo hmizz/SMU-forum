@@ -13,6 +13,7 @@ import { NgForm } from "@angular/forms";
 export class PostListComponent implements OnInit {
   filter = { Music: true, Gaming: true, TV: true };
   posts: Post[] = [];
+  postId: string ;
   
   message: boolean = false;
   tab: any;
@@ -31,16 +32,7 @@ export class PostListComponent implements OnInit {
       this.message= false ;
   }
 
-  onDelete(postId: string) {
-    this.postsService.deletePost(postId);
-  }
 
-  onUpdate(post: Post, form: NgForm) {
-    let comments: string[] = post.comments;
-    comments.push(form.value.comment.toString());
-    this.postsService.addComment(post.id, comments);
-    
-  }
   
   FilterMov() {
     this.posts = this.postsService.getPostsArray();

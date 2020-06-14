@@ -1,0 +1,108 @@
+<!-- <div class="modal-dialog" role="document">
+    <div class="card">
+      <div class="card-header">
+        {{ post.publisher.name }}
+        <div class="publisher">Topic: {{ post.topic }}</div>
+      </div>
+      <div class="card-body">
+        <p class="title">
+          <a routerLink="">Post title:{{ post.title }}</a>
+        </p>
+        <p class="card-text">{{ post.content }}</p>
+        <a
+          class="comments-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          >View comments
+        </a>
+        <div
+          id="collapseOne"
+          class="collapse"
+          aria-labelledby="headingOne"
+          *ngFor="let comment of post.comments"
+        >
+          {{ comment }}
+        </div>
+        <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
+          <div class="textarea-container">
+            <textarea
+              cols="10"
+              rows="3"
+              name="comment"
+              [ngModel]
+              required
+              placeholder="Post comment"
+              #content="ngModel"
+              class="form-control"
+            ></textarea>
+            <button name="submit" type="submit" class="btn btn-primary">
+              Comment
+            </button>
+          </div>
+        </form>
+      </div>
+      <button (click)="onDelete(post.id)" class="btn btn-danger">
+        DELETE
+      </button>
+    </div>
+  </div> -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{ post.title }}</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ post.content }}
+      </div>
+      <div class="modal-body">
+        <a
+        class="comments-link"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+        >View comments
+      </a>
+      <hr>
+        <div
+        id="collapseOne"
+        class="collapse"
+        aria-labelledby="headingOne"
+        *ngFor="let comment of post.comments"
+      >
+      <div class="card-header">
+        <div class="alert alert-info">
+          {{ comment }}
+        </div>
+      </div>
+        
+      </div>
+      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
+        <div class="textarea-container">
+          <textarea
+            cols="10"
+            rows="3"
+            name="comment"
+            [ngModel]
+            required
+            placeholder="Post comment"
+            #content="ngModel"
+            class="form-control"></textarea>
+          <button name="submit" type="submit" class="btn btn-primary">
+            Comment
+          </button>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
