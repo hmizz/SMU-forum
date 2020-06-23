@@ -10,7 +10,9 @@ router.post("", (req, res, next) => {
         content: req.body.content,
         topic: req.body.topic,
         publisher: req.body.publisher,
-        comments: req.body.comments
+        comments: req.body.comments,
+        date: Date.now()
+
     });
     post.save().then(createdpost => {
         res.status(201).json({
