@@ -26,7 +26,8 @@ export class PostsService {
               publisher: post.publisher,
               content: post.content,
               id: post._id,
-              comments:post.comments
+              comments:post.comments,
+              date:new Date(post.date).toString()
             };
           });
         })
@@ -42,13 +43,13 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comments:string[]  }>(
+    return this.http.get<{ _id: string; title: string; content: string; topic:string; publisher: {name : string, id : string};comments:string[];date:string  }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
 
   addPost(title: string, topic: string , content:string) {
-    const post: Post = { id: null, title: title, topic: topic, publisher:{ name:this.authService.getUsername(),id:this.authService.getUserID()}, content: content, comments: [] };
+    const post: Post = { id: null, title: title, topic: topic, publisher:{ name:this.authService.getUsername(),id:this.authService.getUserID()}, content: content, comments: [],date:null };
     this.http
       .post<{ message: string; postId: string }>(
         "http://localhost:3000/api/posts",

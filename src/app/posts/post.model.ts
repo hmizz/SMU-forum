@@ -5,4 +5,5 @@ export interface Post {
     topic: string;
     publisher: {name:string, id: string};
     comments: string[];
+    date : string;
   }

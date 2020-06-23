@@ -1,7 +1,7 @@
 :host {
   display: block;
   margin-top: 120px;
-  padding: 75px;
+  
 }
 
 .info-text {
@@ -31,6 +31,10 @@ align-content: center;}
   width: 100%;
   line-height: 1.2em;
   height: 2.4em;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> c98523a5bfadf9bb83e143767f6b0c86a32092ea
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -59,4 +63,32 @@ align-content: center;}
 
 .form-control {
   resize: none;
+}
+.searchbar{
+ 
+  width: 300px;
+  background-color: #f2f2f2;
+  border-radius: 0 50px 50px 0;
+  border: none;
+
+ }
+ .search{
+   margin-left: 50px;
+ 
+ }
+ .search-bar-container{
+  
+  margin-left: 110px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+ }
+ .search-label{
+  font-size: large;
+  font-weight: bold;
+ }
+ .create-btn{
+  margin-left: 50px;
+}
+.text-muted{
+  align-self: flex-end;
 }

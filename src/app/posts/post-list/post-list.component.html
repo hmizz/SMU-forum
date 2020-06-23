@@ -1,3 +1,9 @@
+<div class="search-bar-container">
+  <label class="search-label" for="Search-Club">Search Club</label><br />
+  <img src="../../assets/Icons/icon_search.svg" width="17px" alt="" />
+  <input class="searchbar" type="text" [(ngModel)]="title" (input)="search()" />
+  <button class="create-btn btn-primary" mat-raised-button  [routerLink]="['/create']">Create your own post</button>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -78,6 +84,7 @@
         </ul>
       </div>
     </div>
+   
     <div class="col-md-9">
       <div
         class="alert alert-info"
@@ -101,6 +108,7 @@
           </p></h3>
           <p class="card-text">{{ post.content }}</p>
         </div>
+        <small class="text-muted">{{post.date}}</small>
         <div class="card-footer">
          <button class="btn" data-toggle="modal" [attr.data-target]="'#exampleModal' + i">View More</button>
         </div>

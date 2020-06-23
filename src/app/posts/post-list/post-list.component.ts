@@ -14,10 +14,10 @@ export class PostListComponent implements OnInit {
   filter = { Music: true, Gaming: true, TV: true };
   posts: Post[] = [];
   postId: string ;
-  
+  createdOn:string
   message: boolean = false;
   tab: any;
-
+  title:string;
   private postsSub: Subscription;
 
   constructor(public postsService: PostsService) {}
@@ -32,6 +32,17 @@ export class PostListComponent implements OnInit {
       this.message= false ;
   }
 
+  search(){
+    if(this.title !=""){ 
+      this.posts=this.posts.filter(res=>{
+      return res.title.toLocaleLowerCase().match(this.title.toLocaleLowerCase());
+    });
+
+    }else if (this.title==""){
+      this.ngOnInit();
+    }
+  }
+  
   FilterMov() {
     this.posts = this.postsService.getPostsArray();
     this.posts = this.posts.filter((res) => {

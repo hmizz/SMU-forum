@@ -37,6 +37,7 @@ export class PostsCreateComponent implements OnInit {
             topic: postData.topic,
             publisher: postData.publisher,
             comments: postData.comments,
+            date:postData.date
           };
         });
       } else {
@@ -56,6 +57,7 @@ export class PostsCreateComponent implements OnInit {
         form.value.title,
         form.value.topic,
         form.value.content
+      
       );
     } else {
       let post: Post = {
@@ -68,6 +70,7 @@ export class PostsCreateComponent implements OnInit {
           id: this.post.publisher.id,
         },
         comments: this.post.comments,
+        date:this.post.date
       };
       this.postsService.updatePost(post);
     }
