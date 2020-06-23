@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3" >
+        <div class="list-group-full-width-div" id="scroll" >
+          <a
+            class="list-group-item list-group-item-action"
+            [class.active]="tab == 'tabOne'"
+            (click)="tab = 'tabOne'"
+            >Profile</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            [class.active]="tab == 'tabTwo'"
+            (click)="tab = 'tabTwo'"
+            >My Posts
+          </a>
+          <a
+            class="list-group-item list-group-item-action"
+            [class.active]="tab == 'tabThree'"
+            (click)="tab = 'tabThree'"
+            >Events Requests</a>
+        </div>
+      </div>
+      <div class="col-md-9" *ngIf="tab == 'tabOne'">
+        <app-profile></app-profile>
+      </div>
+      <div class="col-md-9" *ngIf="tab == 'tabTwo'">
+        <app-my-posts></app-my-posts>
+      </div>
+      <div class="col-md-9 overflow-auto" *ngIf="tab == 'tabThree'">
+        
+      </div>
+    </div>
+  </div>
+  

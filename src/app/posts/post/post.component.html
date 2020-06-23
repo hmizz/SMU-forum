@@ -1,54 +1,4 @@
-<!-- <div class="modal-dialog" role="document">
-    <div class="card">
-      <div class="card-header">
-        {{ post.publisher.name }}
-        <div class="publisher">Topic: {{ post.topic }}</div>
-      </div>
-      <div class="card-body">
-        <p class="title">
-          <a routerLink="">Post title:{{ post.title }}</a>
-        </p>
-        <p class="card-text">{{ post.content }}</p>
-        <a
-          class="comments-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-          >View comments
-        </a>
-        <div
-          id="collapseOne"
-          class="collapse"
-          aria-labelledby="headingOne"
-          *ngFor="let comment of post.comments"
-        >
-          {{ comment }}
-        </div>
-        <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
-          <div class="textarea-container">
-            <textarea
-              cols="10"
-              rows="3"
-              name="comment"
-              [ngModel]
-              required
-              placeholder="Post comment"
-              #content="ngModel"
-              class="form-control"
-            ></textarea>
-            <button name="submit" type="submit" class="btn btn-primary">
-              Comment
-            </button>
-          </div>
-        </form>
-      </div>
-      <button (click)="onDelete(post.id)" class="btn btn-danger">
-        DELETE
-      </button>
-    </div>
-  </div> -->
+
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -67,9 +17,18 @@
         data-toggle="collapse"
         data-target="#collapseOne"
         aria-expanded="true"
+        *ngIf="!message"
         aria-controls="collapseOne"
         >View comments
       </a>
+      <div
+      class="alert alert-info"
+      role="alert"
+      *ngIf="message"
+      style="height: 40px;"
+    >
+     no comments for this post
+    </div>
       <hr>
         <div
         id="collapseOne"
@@ -77,6 +36,7 @@
         aria-labelledby="headingOne"
         *ngFor="let comment of post.comments"
       >
+
       <div class="card-header">
         <div class="alert alert-info">
           {{ comment }}
@@ -84,7 +44,7 @@
       </div>
         
       </div>
-      <form (submit)="onUpdate(post, commentForm)" #commentForm="ngForm">
+      <form (submit)="onUpdate(post, commentForm)" *ngIf="isAuth" #commentForm="ngForm">
         <div class="textarea-container">
           <textarea
             cols="10"

@@ -8,7 +8,8 @@ const userRoutes = require("./routes/users")
 
 const app = express();
 
-mongoose.connect("mongodb+srv://DevAcc:azerty1234@webproject-prfbn.mongodb.net/test?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://DevAcc:azerty1234@webproject-prfbn.mongodb.net/test?retryWrites=true&w=majority"
+,{ useNewUrlParser: true,useUnifiedTopology: true})
 .then(() => {
     console.log('Conneted to database');
 }).catch(() => {
@@ -32,7 +33,6 @@ app.use((req, res, next) => {
   });
 
 app.use("/api/posts",postsRoutes);
-app.use("/api/events",eventsRoutes);
 app.use("/api/user",userRoutes);
 
 module.exports = app;

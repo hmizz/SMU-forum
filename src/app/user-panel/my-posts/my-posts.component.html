@@ -1,0 +1,39 @@
+<div
+  class="alert alert-info"
+  role="alert"
+  *ngIf="message"
+  style="height: 40px;"
+>
+  no posts Created
+  <a routerLink='/create' class="alert-link">Express yourself</a>.
+  here.
+</div>
+<div class="card" *ngFor="let post of posts; index as i">
+  <div class="card-header">
+    {{ post.title }}
+    <div class="publisher">Topic: {{ post.topic }}</div>
+  </div>
+  <div class="card-body">
+    <p class="title">
+      {{ post.publisher.name }}
+    </p>
+  </div>
+  <div class="card-footer">
+    <button
+      class="btn"
+      data-toggle="modal"
+      [attr.data-target]="'#exampleModal' + i"
+    >
+      View More
+    </button>
+  </div>
+  <app-post
+    class="modal fade fade bd-example-modal-lg"
+    id="exampleModal{{ i }}"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    [post]="post"
+  ></app-post>
+</div>

@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
   message: boolean;
   isAuthenticated = false;
+  userAcclevel : string ;
   private token: string;
+  private id : string ;
+  private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
   private username: string;
-  private id :string;
   constructor(private http: HttpClient, private router: Router) { }
 
   getToken() {
@@ -46,32 +47,107 @@ export class AuthService {
       });
   }
 
-
   login(email: string, password: string) {
-    const authData: AuthData = { fullname: null, email: email, password: password };
-    this.http.post<{ token: string, username: string, id : string }>("http://localhost:3000/api/user/login", authData)
-      .subscribe(response => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          console.log(response);
-          this.username = response.username;
-          this.isAuthenticated = true;
-          this.id = response.id;
-          this.authStatusListener.next(true);
-          this.router.navigate(['/']);
-          this.message= true;
-        }
-      }, (err) => {
+    const authData: AuthData = {
+      fullname: null,
+      email: email,
+      password: password,
+    };
+    this.http
+      .post<{ token: string; expiresIn: number; username: string;id: string; accessLevel: string }>(
+        "http://localhost:3000/api/user/login",
+        authData
+      )
+      .subscribe(
+        (response) => {
+          this.message = true;
+          const token = response.token;
+          this.token = token;
+          if (token) {
+            const expiresInDuration = response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            this.username = response.username;
+            this.id = response.id
+            this.userAcclevel = response.accessLevel ;
+            console.log(this.userAcclevel);
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+            const now = new Date();
+            const expirationDate = new Date(
+              now.getTime() + expiresInDuration * 1000
+            );
+            this.saveAuthData(token, expirationDate, response.username,response.id, response.accessLevel);
+            this.router.navigate(["/"]);
+          }
+        },
+        (err) => {
           this.message = false;
-      }
+        }
       );
   }
+
+  autoAuthUser(){
+    const authdata =this.getAuthData();
+    if(!authdata){
+      return ;
+    }
+    const now =  new Date();
+    const expiresIn = authdata.expirationDate.getTime() - now.getTime() ;
+    if (expiresIn > 0){
+      this.token = authdata.token;
+      this.isAuthenticated =true;
+      this.username = authdata.fullname ;
+      this.id = authdata.id;
+      this.userAcclevel = authdata.accessLevel ;
+      this.setAuthTimer(expiresIn/1000);
+      this.authStatusListener.next(true);
+    }
+  }
+    private setAuthTimer(duration: number){
+      this.tokenTimer = setTimeout(() => {
+        this.logout();
+      }, duration * 1000);
+    }
 
   logout() {
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
-    this.router.navigate(['/']);
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
+    this.router.navigate(["/"]);
+  }
+  private saveAuthData(token: string, expirationDate: Date, fullname : string,id: string, accessLevel : string) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", fullname);
+    localStorage.setItem("expiration", expirationDate.toISOString());
+    localStorage.setItem("accesslevel",accessLevel);
+    localStorage.setItem("id",id);
+  }
+
+  private clearAuthData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("expiration");
+    localStorage.removeItem("accesslevel");
+    localStorage.removeItem("id");
+  }
+
+  private getAuthData(){
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    const expirationDate = localStorage.getItem("expiration");
+    const accessLevel = localStorage.getItem("accesslevel");
+    const id = localStorage.getItem("id");
+    if(!token && !expirationDate){
+      return;
+    }
+    return {
+      token : token,
+      fullname : username,
+      expirationDate : new Date(expirationDate),
+      id : id,
+      accessLevel : accessLevel
+    }
   }
 }

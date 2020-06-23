@@ -5,13 +5,15 @@ import { LoginComponent } from './authentication/login/login.component';
 import { PostsCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { AuthGuard } from './authentication/auth.guard';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 
  const routes: Routes = [
   { path: '', component: BodyComponent},
   { path: 'login', component: LoginComponent},
   {path : 'create', component: PostsCreateComponent, canActivate : [AuthGuard]},
-  {path : 'posts', component: PostListComponent}  
+  {path : 'posts', component: PostListComponent},
+  {path : 'userpanel', component: UserPanelComponent}   
  ];
 
  @NgModule({

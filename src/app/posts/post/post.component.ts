@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/authentication/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -11,10 +12,17 @@ import { NgForm } from '@angular/forms';
 export class PostComponent implements OnInit {
 
   @Input() post : Post ;
-
-  constructor(public postsService: PostsService) { }
+public message =true ;
+public isAuth: boolean ;
+  constructor(public postsService: PostsService, public authService: AuthService) {
+   }
 
   ngOnInit(): void {
+    if (this.post.comments.length == 0){
+      this.message == true ;
+    }
+    else {this.message= false};
+    this.isAuth = this.authService.getIsAuth();
   }
 
   onDelete(postId: string) {

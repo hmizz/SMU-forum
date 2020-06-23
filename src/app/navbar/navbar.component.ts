@@ -22,14 +22,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
   ngOnInit() {
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.username= this.authService.getUsername();
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.username = this.authService.getUsername();
         this.userIsAuthenticated = isAuthenticated;
-        this.username= this.authService.getUsername();
       });
   }
-
-
-
 }

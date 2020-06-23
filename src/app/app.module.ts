@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LoginComponent } from './authentication/login/login.component';
 import { FormsModule} from "@angular/forms";
+import {MatDatepickerModule} from "@angular/material/datepicker"
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -25,6 +26,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { PostsCreateComponent } from './posts/posts-create/posts-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostComponent } from './posts/post/post.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
+import { ProfileComponent } from './user-panel/profile/profile.component';
+import { MyPostsComponent } from './user-panel/my-posts/my-posts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +41,9 @@ import { PostComponent } from './posts/post/post.component';
     PostsCreateComponent,
     PostListComponent,
     PostComponent,
+    UserPanelComponent,
+    ProfileComponent,
+    MyPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +53,7 @@ import { PostComponent } from './posts/post/post.component';
     CarouselModule,
     FormsModule,
     MatTabsModule,
+    MatDatepickerModule,
     NgbModule,
     MatInputModule,
     MatCardModule,

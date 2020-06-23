@@ -1,0 +1,11 @@
+.container{
+    margin-top: 90px;
+    margin-bottom: 40px;
+    position: relative;
+    min-height: 70%;
+}
+
+#scroll{
+    position: fixed;
+    width: 270px;
+}
