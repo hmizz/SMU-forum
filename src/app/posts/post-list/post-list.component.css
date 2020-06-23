@@ -10,8 +10,8 @@
 .btn {
   margin-right: 20px;
   margin-left: 20px;
-  margin-top: 20px;
-}
+  margin-top: 5px;
+align-content: center;}
 .card {
   margin-bottom: 50px;
   grid-column: auto auto auto;
@@ -26,11 +26,11 @@
   justify-self: end;
   font-weight: 50;
 }
+
 .card-text{
   width: 100%;
   line-height: 1.2em;
   height: 2.4em;
-  background-color: gainsboro;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -40,19 +40,23 @@
 .card-body {
   display: grid;
 }
+
 .textarea-container {
   position: relative;
 }
+
 .textarea-container textarea {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
 }
+
 .textarea-container button {
   position: absolute;
   top: 0;
   right: 0;
 }
+
 .form-control {
   resize: none;
 }

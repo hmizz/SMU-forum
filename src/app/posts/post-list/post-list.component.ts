@@ -32,8 +32,6 @@ export class PostListComponent implements OnInit {
       this.message= false ;
   }
 
-
-  
   FilterMov() {
     this.posts = this.postsService.getPostsArray();
     this.posts = this.posts.filter((res) => {
